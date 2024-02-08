@@ -37,7 +37,7 @@
         <field name="model">accompany.offer</field>
         <field name="arch" type="xml">
             <tree>
-             
+                <field name="reference"/>
                 <field name="Offername"/>
                 <field name="Details"/>
                 <field name="Revenus"/>
@@ -50,6 +50,7 @@
         <field name="model">accompany.offer</field>
         <field name="arch" type="xml">
                 <search>
+                    <field name="reference"/>
                     <field name="Offername"/>
                     <field name="Details"/>
                     <field name="Revenus"/>
@@ -80,16 +81,13 @@
     </record>
   
 
-    
-    <menuitem id="menu_offers"
-              name="Offers"
-              parent="menu_accompany_operations"  
-              action="action_accompany_offer"
-              sequence="10"/>
-     <menuitem id="menu_offers"
-              name="Offers"
-              parent="menu_accompany_operations"  
-              action="action_accompany_offer"
-              sequence="10"/>
+   
+
+<menuitem id="mmenu_accompany_employe"
+              name="Employe"
+            parent="menu_accompany_root"
+            action=""
+             />
+   
  
 </odoo>

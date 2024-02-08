@@ -7,7 +7,7 @@
             <tree>
                 <field name="name"/>
                 <field name="due_date"/>
-                <field name="assign_to_id"/>
+                <field name="Employes"/>
                 <field name="state"/>
             </tree>
         </field>
@@ -34,7 +34,7 @@
                             <field name="due_date"/>
                         </group>
                         <group>
-                            <field name="assign_to_id"/>
+                            <field name="Employes"/>
                         </group>
                         <group>
                             <field name="description"/>
@@ -57,14 +57,14 @@
         <field name="arch" type="xml">
             <search>
                 <field name="name"/>
-                <field name="assign_to_id"/>
+                <field name="Employes"/>
                 <filter name="state_new" string="New" domain="[('state', '=', 'new')]"/>
                 <filter name="state_in_progress" string="In Progress" domain="[('state', '=', 'in_progress')]"/>
                 <filter name="state_completed" string="Completed" domain="[('state', '=', 'completed')]"/>
            
                 <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
                 <filter name="group_date" string="Date" context="{'group_by': 'due_date'}"/>
-                <filter name="group_assign_to_id" string="Assignee" context="{'group_by': 'assign_to_id'}"/>
+                <filter name="group_assign_to_id" string="Assignee" context="{'group_by': 'Employes'}"/>
             </search>
         </field>
     </record>
@@ -80,11 +80,9 @@
             </p>
         </field>
     </record>
-
-    <menuitem id="all_task_menu_item"
-              name="All Tasks"
-              parent="todo_menu"
+  <menuitem id="menu_todos"
+              name="TODO"
+             parent="menu_accompany_root"  
               action="todo_task_action"
-              sequence="10"
-              />
+              sequence="10"/>
 </odoo>

@@ -8,7 +8,13 @@ class TodoTask(models.Model):
     name = fields.Char('Task Name')
     due_date = fields.Date('Due Date')
     description = fields.Text('Description')
-    assign_to_id = fields.Many2one('res.partner', string='Assign To')
+   
+
+    Employes = fields.Many2many(
+        'accompany.employe',
+        string='Related Todo Task',
+        relation='accompany_employe_todo_task_rel' )
+
     state = fields.Selection([
         ('new','New'),
         ('in_progress','In progress'),

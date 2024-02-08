@@ -12,7 +12,8 @@
         'views/menu.xml',
         'views/client.xml',
         'views/offer.xml',
-        'views/todo_task.xml'
+        'views/todo_task.xml',
+        'views/Employe.xml'
     ],
     'images': [
         'static/description/icon.png',  # Adjust the path to your icon image
