@@ -4,28 +4,6 @@
               name="AccompanyCRM"
             
               sequence="10"/>
-   <menuitem id="menu_accompany_operations"
-              name="operations"
-              parent="menu_accompany_root"
-              sequence="10"/>
-   <menuitem id="menu_accompany_offer"
-              name="offers"
-              parent="menu_accompany_root"
-              sequence="10"/>
-  <menuitem id="menu_accompany_todo"
-               name="TO DO"
-               parent="menu_accompany_root"
-             />
-
-
-
-
-
-
-<menuitem id="mmenu_accompany_employe"
-              name="Employe"
-            parent="menu_accompany_root"
-             />
 
 
                

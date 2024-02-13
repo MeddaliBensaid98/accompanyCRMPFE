@@ -39,7 +39,7 @@
                 <field name="country"/>
                          
                 <field name="phone_number"/>
-           
+                <field name="Tasks" />
               
             </tree>
         </field>

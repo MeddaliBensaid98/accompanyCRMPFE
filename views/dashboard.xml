@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+   <record id="act_patient_appointments" model="ir.actions.act_window">
+        <field name="name">Todo task</field>
+        <field name="res_model">todo.task</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="AccompanyCRM.task_graph"/>
+    </record>
+    
+    <record id="act_calendar" model="ir.actions.act_window">
+        <field name="name">todo calendar</field>
+        <field name="res_model">todo.task</field>
+        <field name="view_mode">calendar</field>
+        <field name="view_id" ref="AccompanyCRM.view_todo_calendar"/>
+     </record>
+    <record id="act_offers" model="ir.actions.act_window">
+        <field name="name">Offers</field>
+        <field name="res_model">accompany.offer</field>
+        <field name="view_mode">tree,form</field>
+      
+    </record>
+       <record id="act_employe" model="ir.actions.act_window">
+        <field name="name">Employes</field>
+        <field name="res_model">accompany.employe</field>
+        <field name="view_mode">tree,form</field>
+      
+    </record>
+
+    
+        <record id="view_accompany_dashboard_form" model="ir.ui.view">
+                <field name="name">accompany.dashboard.form</field>
+                <field name="model">board.board</field>
+                <field name="arch" type="xml">
+                    <form string="Dashboard">
+                        <board style="2-1"> 
+                            <column>
+                              
+                                 <action String="test"
+                                        name="%(act_patient_appointments)d"/>
+                             
+                                         <action String="test"
+                                        name="%(act_offers)d"
+                                />
+                                
+                                         <action String="test"
+                                        name="%(act_employe)d"
+                                />
+                            </column>
+                            <column>
+                               <action String="calendar"
+                                        name="%(act_calendar)d"
+                                />
+                             
+                            </column>
+                        
+                        </board>
+                    </form>
+                </field>
+            </record>
+      
+    <record id="action_accompany_dashboard" model="ir.actions.act_window">
+        <field name="name">dashboard</field>
+   
+     
+        <field name="res_model">board.board</field>       
+        <field name="view_mode">form</field>
+        <field name="usage">menu</field>
+        <field name="view_id" ref="view_accompany_dashboard_form"/>
+
+    </record>
+    
+    
+        <menuitem id="menu_dashboard"
+                    name="dashboard"
+                    parent="menu_accompany_root"  
+                    action="action_accompany_dashboard"
+                    sequence="10"/>
+  
+</odoo>
