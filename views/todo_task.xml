@@ -4,12 +4,16 @@
         <field name="name">todo.task.tree</field>
         <field name="model">todo.task</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree class="header_custom" decoration-danger="(is_late)" >
                 <field name="name"/>
                 <field name="due_date"/>
                 <field name="Employes"/>
                 <field name="state"/>
+                 <field name="is_late" invisible="1"/>
+                <field name="Ref_offer"/>
+               
             </tree>
+              
         </field>
     </record>
 
@@ -20,24 +24,32 @@
             <form>
                 <sheet>
                     <header>
-                        <field name="state" widget="statusbar" options="{'clickable': 1}"/>
-
+                        <field name="state" widget="statusbar" options="{'clickable': 1}" required="1"/>
                     </header>
                     <div class="oe_title">
                         <label for="name"/>
                         <h1>
-                            <field name="name"/>
+                            <field name="name" required="1"/>
                         </h1>
                     </div>
                     <group>
                         <group>
-                            <field name="due_date"/>
+                            <field name="due_date" required="1"/>
                         </group>
                         <group>
-                            <field name="Employes"/>
+                            <field name="Employes" required="1"/>
                         </group>
                         <group>
-                            <field name="description"/>
+                            <field name="description" required="1"/>
+                        </group>    
+                         <group>
+                            <field name="Ref_offer" required="1"/>
+                        </group>
+                        <group>
+                               <field name="tag_ids" widget="many2many_tags" required="1"/>
+                        </group>
+                         <group>
+                       <field name="state"/> 
                         </group>
                     </group>
                 </sheet>
@@ -46,10 +58,48 @@
                     <field name="activity_ids"/>
                     <field name="message_ids"/>
                 </div>
-
             </form>
         </field>
     </record>
+
+ 
+
+    <record id="view_todo_kanban" model="ir.ui.view">
+            <field name="name">todo.task.kanban</field>
+            <field name="model">todo.task</field>
+            <field name="arch" type="xml">
+                <kanban >
+                    <field name="name"/>
+                    <field name="due_date"/>
+                    <field name="Employes"/>
+                    <field name="state"/>
+                    <field name="is_late" invisible="1"/>
+                    <field name="Ref_offer"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                             <div class="o_kanban_record_headings mt4">
+                                        <strong class="o_kanban_record_title">TASK:<field name="name"/></strong>
+                                        
+                                    </div>
+                                         <li>  state: <field name="state"/> </li>
+                                    
+                                             <li>  Employes: <field name="Employes"/> </li>
+                                        <li> Deadline:<field name="due_date"/></li>
+                                          <li> Offer:<field name="Ref_offer"/></li>
+                                          <div class="oe_kanban_details ">
+                                   <ul> 
+                                    <li>   Tags<field name="tag_ids" widget="many2many_tags" required="1"/></li>
+                                
+                                   </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                
+                </kanban>
+            </field>
+        </record>
 
     <record id="todo_task_view_search" model="ir.ui.view">
         <field name="name">todo task search</field>
@@ -61,25 +111,49 @@
                 <filter name="state_new" string="New" domain="[('state', '=', 'new')]"/>
                 <filter name="state_in_progress" string="In Progress" domain="[('state', '=', 'in_progress')]"/>
                 <filter name="state_completed" string="Completed" domain="[('state', '=', 'completed')]"/>
-           
+          
                 <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
                 <filter name="group_date" string="Date" context="{'group_by': 'due_date'}"/>
                 <filter name="group_assign_to_id" string="Assignee" context="{'group_by': 'Employes'}"/>
+                <filter name="group_Ref_offer" string="Ref_offer" context="{'group_by': 'Ref_offer'}"/>
             </search>
         </field>
     </record>
-
+      <record id="view_todo_calendar" model="ir.ui.view">
+        <field name="name">todo task calendar</field>
+        <field name="model">todo.task</field>
+        <field name="arch" type="xml">
+            <calendar date_start="due_date"  string="todo calendar" color="name" >
+                <field name="name" filters="1"/>
+                <field name="Employes"/>
+                <field name="state"/>
+            </calendar>
+        </field>
+    </record>
     <record id="todo_task_action" model="ir.actions.act_window">
         <field name="name">ToDo Task</field>
         <field name="res_model">todo.task</field>
-        <field name="view_mode">tree,form</field>
-        <field name="context">{'search_default_todo': 1}</field>
+        <field name="view_mode">kanban,calendar,tree,form</field>
+        <field name="context">{'group_by': 'state'}</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
                 Click to add a new task.
             </p>
         </field>
     </record>
+      <!-- Define the scheduled job to check task due dates -->
+    <record id="check_todo_date_cron" model="ir.cron">
+        <field name="name">Check Todo Task Due Dates</field>
+        <field name="model_id" ref="model_todo_task"/>
+        <field name="state">code</field>
+        <field name="code">model.check_expected_date()</field> 
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="active">True</field>
+    </record>
+
   <menuitem id="menu_todos"
               name="TODO"
              parent="menu_accompany_root"  

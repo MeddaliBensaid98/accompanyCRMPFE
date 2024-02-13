@@ -12,25 +12,19 @@ class AccompanyClient(models.Model):
     name = fields.Char(string='Name', required=True ,   tracking=True)
     email = fields.Char(string='Email', size=100)
     country = fields.Selection([
-        ('usa', 'United States'),
-        ('uk', 'United Kingdom'),
-        ('france', 'France'),
-        ('TUN', 'Tunisie'),
+        ('+1', '+1 - United States'),
+        ('+44', '+44 - United Kingdom'),
+        ('+33', '+33 - France'),
+        ('+216', '+216 - Tunisia'),
         # Add more countries as needed
-    ], string='Country')
+    ], string='Country Code')
     is_foreign = fields.Boolean(string='Is Foreign?' , tracking=True) 
     notes = fields.Text(string='Notes')
     capitalized_name = fields.Char(string='Capitalized Name', compute='_compute_capitalized_name')
     phone_number = fields.Char(string='Phone Number', size=20)
     ref = fields.Char(string="Reference", default=lambda self: _('New'))
-    offer_id = fields.Many2one('accompany.offer',string="offer",tracking=True)
-    tag_ids = fields.Many2many(
-    'res.partner.category',  # Related model
-    'accomapny_client_tag_rel',  # Relation table name
-    'client_id',  # Field name for "this" side of the relationship (i.e., in accompany.offer model)
-    'tag_id',  # Field name for the "other" side of the relationship (i.e., in res.partner.category model)
-    string="Tags"  # Label for the field in the UI
-)
+
+ 
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -38,13 +32,14 @@ class AccompanyClient(models.Model):
             vals['ref'] = self.env['ir.sequence'].next_by_code('accompany.client')
         return super(AccompanyClient, self).create(vals_list)
     
-    @api.constrains('phone_number')
-    def _check_valid_phone_number(self):
+    @api.onchange('country')
+    def _onchange_country(self):
         for record in self:
-            if record.phone_number:
-                # Validate phone number format using a regular expression
-                if not re.match(r'^\+(?:[0-9] ?){6,14}[0-9]$', record.phone_number):
-                    raise ValidationError("Invalid phone number: %s" % record.phone_number)
+            if record.country and record.phone_number:
+                if not record.phone_number.startswith(record.country):
+                    record.phone_number = record.country + record.phone_number[len(record.country):]
+            elif record.country:
+                record.phone_number = record.country
                 
     @api.depends('name')
     def _compute_capitalized_name(self):
@@ -58,8 +53,10 @@ class AccompanyClient(models.Model):
     def onchange_notes(self):
         if self.is_foreign == True:
             self.notes = 'this company is not from tunisia '
+
         else:
             self.notes = 'this company is  from tunisia '
+        
     @api.constrains('email')
     def _check_valid_email(self):
         for record in self:
@@ -67,3 +64,30 @@ class AccompanyClient(models.Model):
                 # Validate email format using a simple regex pattern
                 if not re.match(r"[^@]+@[^@]+\.[^@]+", record.email):
                     raise ValidationError("Invalid email address: %s" % record.email)
+                
+    @api.onchange('is_foreign', 'country')
+    def onchange_notes(self):
+        if self.country and self.country != '+216':
+            self.is_foreign = True
+        else:
+            self.is_foreign = False
+
+        if self.is_foreign:
+            self.notes = 'This company is not from Tunisia.'
+        else:
+            self.notes = 'This company is from Tunisia.'
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if 'email' in vals:
+                existing_employee = self.env['accompany.client'].search([('email', '=', vals['email'])])
+                if existing_employee:
+                    raise ValidationError("Client with email '%s' already exists." % vals['email'])
+            if 'phone_number' in vals:
+                existing_phone_employee = self.env['accompany.client'].search([('phone_number', '=', vals['phone_number'])])
+                if existing_phone_employee:
+                    raise ValidationError("client with phone number '%s' already exists." % vals['phone_number'])
+            if 'name' in vals:
+                existing_employee = self.env['accompany.client'].search([('name', '=', vals['name'])])
+                if existing_employee:
+                    raise ValidationError("Client with name '%s' already exists." % vals['name'])

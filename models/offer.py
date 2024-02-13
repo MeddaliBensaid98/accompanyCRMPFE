@@ -18,14 +18,16 @@ class AccompanyOffers(models.Model):
         ('in_progress','In progress'),
         ('completed','Completed'),
     ])
-
+    Client_id = fields.Many2one('accompany.client',string="Client",tracking=True)
+ 
+ 
 
 
     
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list: 
-            vals['reference'] = self.env['ir.sequence'].next_by_code('accompany.Offer')
+            vals['reference'] = self.env['ir.sequence'].next_by_code('accompany.offer')
         return super(AccompanyOffers, self).create(vals_list)
     
     @api.constrains('Revenus')

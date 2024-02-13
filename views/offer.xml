@@ -7,25 +7,23 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    
-
                     <div class="oe_title">
                         <h1>
-                            <field name="reference" readonly="1"/>
+                            <field name="reference" readonly="1" required="1"/>
                         </h1>
                     </div>
-                    
                     <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
                     <group>
-                        <field name="Offername"/>
-                        <field name="Details"/>
-                        <field name="Revenus"/>
+                        <field name="Offername" required="1"/>
+                        <field name="Details" required="1"/>
+                        <field name="Revenus" required="1"/>
                         <field name="active" invisible="1" />
-                      
+                        <field name="Client_id" options="{'no_open': True,'no_create':false}"/>
+                    
                     </group>
                     <div class="oe_chatter">
-                            <field name="message_follower_ids"/>
-                            <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
                     </div>
                 </sheet>
             </form>
@@ -73,20 +71,15 @@
         <field name="context">{'search_default_filter_child': 1}</field>
       
     </record>
-       <record id="todo_task_action" model="ir.actions.act_window">
-        <field name="name">ToDo Task</field>
-        <field name="res_model">accompany.offer</field>
-
       
-    </record>
   
 
    
 
-<menuitem id="mmenu_accompany_employe"
-              name="Employe"
+<menuitem id="mmenu_accompany_offer"
+              name="offers"
             parent="menu_accompany_root"
-            action=""
+            action="action_accompany_offer"
              />
    
  
