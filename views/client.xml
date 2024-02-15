@@ -12,9 +12,10 @@
                     <field name="name" required="1"/>
                     <field name="email" required="1"/>
                     <field name="phone_number" required="1"/>
+                    
+                    <field name="country" required="1"/>
                     <field name="is_foreign" required="1"/>
                    
-                    <field name="country" required="1"/>
                     <field name="notes" required="1"/>
             
                     <field name="capitalized_name" />

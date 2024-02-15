@@ -18,12 +18,14 @@ class TodoTask(models.Model):
 
     state = fields.Selection([
         ('new','New'),
-         ('Qualified','Qualified'),
+
 
         ('in_progress','In progress'),
         ('completed','Completed'),
       
-        ],default='new')
+        ],default='new',  group_expand='_expand_states', index=True)
+    def _expand_states(self, states, domain, order):
+        return [key for key, val in type(self).state.selection]
     tag_ids = fields.Many2many(
         'res.partner.category',  # Related model
         'todo_task_tag_rel',  # Relation table name
@@ -43,12 +45,12 @@ class TodoTask(models.Model):
         self.state = 'completed'
         
     #@api.model
-    def read(self, fields=None, load='_classic_read'):
+    #def read(self, fields=None, load='_classic_read'):
         # Appel de la méthode parente pour effectuer les opérations normales de lecture
-        result = super(TodoTask, self).read(fields=fields, load=load)
+       # result = super(TodoTask, self).read(fields=fields, load=load)
         
         # Exécuter votre fonction personnalisée lorsque la vue de liste est ouverte
-        self.check_expected_date()
+      #  self.check_expected_date()
         
         return result
         

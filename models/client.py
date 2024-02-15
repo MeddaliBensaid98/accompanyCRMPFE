@@ -30,6 +30,18 @@ class AccompanyClient(models.Model):
     def create(self, vals_list):
         for vals in vals_list: 
             vals['ref'] = self.env['ir.sequence'].next_by_code('accompany.client')
+            if 'email' in vals:
+                existing_employee = self.env['accompany.client'].search([('email', '=', vals['email'])])
+                if existing_employee:
+                    raise ValidationError("Client with email '%s' already exists." % vals['email'])
+            if 'phone_number' in vals:
+                existing_phone_employee = self.env['accompany.client'].search([('phone_number', '=', vals['phone_number'])])
+                if existing_phone_employee:
+                    raise ValidationError("client with phone number '%s' already exists." % vals['phone_number'])
+            if 'name' in vals:
+                existing_employee = self.env['accompany.client'].search([('name', '=', vals['name'])])
+                if existing_employee:
+                    raise ValidationError("Client with name '%s' already exists." % vals['name'])
         return super(AccompanyClient, self).create(vals_list)
     
     @api.onchange('country')
@@ -76,18 +88,4 @@ class AccompanyClient(models.Model):
             self.notes = 'This company is not from Tunisia.'
         else:
             self.notes = 'This company is from Tunisia.'
-    @api.model_create_multi
-    def create(self, vals_list):
-        for vals in vals_list:
-            if 'email' in vals:
-                existing_employee = self.env['accompany.client'].search([('email', '=', vals['email'])])
-                if existing_employee:
-                    raise ValidationError("Client with email '%s' already exists." % vals['email'])
-            if 'phone_number' in vals:
-                existing_phone_employee = self.env['accompany.client'].search([('phone_number', '=', vals['phone_number'])])
-                if existing_phone_employee:
-                    raise ValidationError("client with phone number '%s' already exists." % vals['phone_number'])
-            if 'name' in vals:
-                existing_employee = self.env['accompany.client'].search([('name', '=', vals['name'])])
-                if existing_employee:
-                    raise ValidationError("Client with name '%s' already exists." % vals['name'])
+ 
