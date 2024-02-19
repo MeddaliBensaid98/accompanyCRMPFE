@@ -23,8 +23,11 @@ class AccompanyClient(models.Model):
     capitalized_name = fields.Char(string='Capitalized Name', compute='_compute_capitalized_name')
     phone_number = fields.Char(string='Phone Number', size=20)
     ref = fields.Char(string="Reference", default=lambda self: _('New'))
-
+    offer_id = fields.Many2one('accompany.offer',string="offer",tracking=True)
+  
+    tasks = fields.Many2one('todo.task',string="tasks",tracking=True)
  
+
 
     @api.model_create_multi
     def create(self, vals_list):

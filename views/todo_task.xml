@@ -11,6 +11,7 @@
                 <field name="state"/>
                  <field name="is_late" invisible="1"/>
                 <field name="Ref_offer"/>
+                
                
             </tree>
               
@@ -35,12 +36,18 @@
                 <sheet>
                     <header>
                         <field name="state" widget="statusbar" options="{'clickable': 1}" required="1"/>
+                    
+                   
+                     
+                        
+          
                     </header>
                     <div class="oe_title">
                         <label for="name"/>
                         <h1>
                             <field name="name" required="1"/>
                         </h1>
+                        
                     </div>
                     <group>
                         <group>
@@ -61,6 +68,15 @@
                          <group>
                        <field name="state"/> 
                         </group>
+                         <group>
+                            <field name="clients"/>
+                        </group>
+                        <group>
+                           <button name="action_send_mail" string="Meeting Mail"  type="object"/>
+                   
+
+                        </group>
+                        
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -71,6 +87,7 @@
             </form>
         </field>
     </record>
+
 
 
     <record id="view_todo_kanban" model="ir.ui.view">
@@ -87,10 +104,11 @@
                                         
                                     </div>
                                          <li>  state: <field name="state"/> </li>
-                                    
+                                        <li>   client:<field name="clients"/> </li>
                                              <li>  Employes: <field name="Employes"/> </li>
                                         <li> Deadline:<field name="due_date"/></li>
                                           <li> Offer:<field name="Ref_offer"/></li>
+                              
                                           <div class="oe_kanban_details ">
                                    <ul> 
                                     <li>   Tags<field name="tag_ids" widget="many2many_tags" required="1"/></li>
@@ -120,6 +138,12 @@
                 <filter name="group_date" string="Date" context="{'group_by': 'due_date'}"/>
                 <filter name="group_assign_to_id" string="Assignee" context="{'group_by': 'Employes'}"/>
                 <filter name="group_Ref_offer" string="Ref_offer" context="{'group_by': 'Ref_offer'}"/>
+                <searchpanel style="background-color: #3DBFFF;">
+                       <field name="state" string="state"  enable_counters="1" icon="fa-exhange"/>
+                       <field name="Ref_offer"   string="Ref_offer"  select="multi"  enable_counters="1"  icon="fa-exhange"/>
+                        <field name="clients"   string="clients"  select="multi"  enable_counters="1"  icon="fa-exhange"/>
+                </searchpanel>
+            
             </search>
         </field>
     </record>

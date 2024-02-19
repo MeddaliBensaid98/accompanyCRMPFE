@@ -13,15 +13,11 @@ class AccompanyOffers(models.Model):
     Revenus = fields.Float(string='Revenus')
     reference = fields.Char(string="Offer Reference", default=lambda self: _('New'))
     active = fields.Boolean(default=True)
-    state = fields.Selection([
-        ('new','New'),
-        ('in_progress','In progress'),
-        ('completed','Completed'),
-    ])
+    
     Client_id = fields.Many2one('accompany.client',string="Client",tracking=True)
  
+    tasks = fields.Many2one('todo.task',string="tasks",tracking=True)
  
-
 
     
     @api.model_create_multi
