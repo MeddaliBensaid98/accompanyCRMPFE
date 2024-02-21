@@ -7,6 +7,11 @@
             <form>
                 <sheet>
                 
+                    <div class="oe_title">
+                            <h1>
+                                <field name="id" readonly="1" required="1"/>
+                            </h1>
+                    </div>
                     <group>
                         <field name="name" required="1"/>
                         <field name="email" required="1"/>
@@ -32,6 +37,7 @@
         <field name="arch" type="xml">
             <tree>
              
+                <field name="id" readonly="1"/>
                 
                 <field name="name"/>
                 <field name="email"/>
@@ -49,7 +55,7 @@
     <field name="model">accompany.employe</field>
     <field name="arch" type="xml">
             <tree>
-             
+                <field name="id"/>
                 <field name="name"/>
                 <field name="email"/>
                  

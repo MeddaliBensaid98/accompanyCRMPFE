@@ -9,7 +9,7 @@ class AccompanyEmploye(models.Model):
     _description = "Accompany Employe Model"
     
    
-
+    id = fields.Char(string="Identifiant", default=lambda self: _('New'))
     name = fields.Char(string='Name', required=True ,   tracking=True)
     email = fields.Char(string='Email', size=100,unique=True)
     _sql_constraints = [
@@ -40,7 +40,7 @@ class AccompanyEmploye(models.Model):
     capitalized_name = fields.Char(string='Capitalized Name', compute='_compute_capitalized_name')
     phone_number = fields.Char(string='Phone Number', size=20)
     
-    ref = fields.Char(default='New',string='Referance')
+   
 
     
     @api.constrains('email')
@@ -52,14 +52,12 @@ class AccompanyEmploye(models.Model):
                     raise ValidationError("Invalid email address: %s" % record.email)
                 
  
-    
-    def create(self, vals):
-        res = super(AccompanyEmploye, self).create(vals)
-        # Assuming envir is meant to be self.env
-        if res.ref == 'New':
-            res.ref = self.env['ir.sequence'].next_by_code('accompany.employe')  # Corrected sequence call
-        return res
-    
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list: 
+            vals['id'] = self.env['ir.sequence'].next_by_code('accompany.employe')
+        return super(AccompanyEmploye, self).create(vals_list)
+
     @api.onchange('country')
     def _onchange_country(self):
         for record in self:

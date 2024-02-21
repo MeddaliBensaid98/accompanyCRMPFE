@@ -91,4 +91,3 @@ class AccompanyClient(models.Model):
             self.notes = 'This company is not from Tunisia.'
         else:
             self.notes = 'This company is from Tunisia.'
- 
