@@ -1,6 +1,6 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
-
+import re
 class TodoTask(models.Model):
     _name = 'todo.task'
     _inherit = ['mail.thread', 'mail.activity.mixin']
@@ -34,23 +34,19 @@ class TodoTask(models.Model):
         'tag_id',  # Field name for the "other" side of the relationship (i.e., in res.partner.category model)
         string="Tags"  # Label for the field in the UI
     )
-    show_mail_button = fields.Boolean(string="Show Mail Button", compute="show_send_mail_button")   
- 
-    @api.depends('state')
-    def show_send_mail_button(self):
-        for record in self:
-            if record.state == 'completed':
-                record.show_mail_button = True 
-            else:
-                record.show_mail_button = False
-            
+   #  show_mail_button = fields.Boolean(string="Show Mail Button", compute="show_send_mail_button")   
     
+    def show_send_mail(self):
+            # Your code to perform actions when the button is clicked
+            # For example, you can send an email or perform any other action
+            print("Send email action triggered for Todo Task:", self.name)
+
     def action_send_mail(self):
-        template =self.env.ref('AccompanyCRM.Accompampany_mail_ation')
-       
-        for rec in self:
-            if template.email_to:
-                template.send_mail(rec.id,force_send=True)
+            # Your code to send emails for Todo Tasks
+            print("Sending emails for Todo Tasks...")
+    
+  
+        
 
 
     @api.model

@@ -9,7 +9,7 @@
                 <field name="due_date"/>
                 <field name="Employes"/>
                 <field name="state"/>
-                 <field name="is_late" invisible="1"/>
+                 <field name="is_late" invisible="0"/>
                 <field name="Ref_offer"/>
                 
                
@@ -37,8 +37,7 @@
                     <header>
                         <field name="state" widget="statusbar" options="{'clickable': 1}" required="1"/>
                     
-                   
-                     
+                    
                         
           
                     </header>
@@ -71,13 +70,10 @@
                          <group>
                             <field name="clients"/>
                         </group>
-                        <group>
-                           <button name="action_send_mail" string="Meeting Mail"  type="object"/>
-                   
-
-                        </group>
-                        
+                       <group>
+                          <button name="action_send_mail" string="Meeting Mail" type="object"/></group>
                     </group>
+                    
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>
@@ -114,6 +110,9 @@
                                     <li>   Tags<field name="tag_ids" widget="many2many_tags" required="1"/></li>
                                 
                                    </ul>
+                                    <ul>
+                                   
+ </ul>
                                 </div>
                             </div>
                         </t>

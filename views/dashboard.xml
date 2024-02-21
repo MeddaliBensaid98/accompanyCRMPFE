@@ -4,7 +4,7 @@
    <record id="act_patient_appointments" model="ir.actions.act_window">
         <field name="name">Todo task</field>
         <field name="res_model">todo.task</field>
-        <field name="view_mode">graph</field>
+        <field name="view_mode">tree,form</field>
         <field name="view_id" ref="AccompanyCRM.task_graph"/>
     </record>
     
@@ -15,9 +15,9 @@
         <field name="view_id" ref="AccompanyCRM.view_todo_calendar"/>
      </record>
     <record id="act_offers" model="ir.actions.act_window">
-        <field name="name">Offers</field>
-        <field name="res_model">accompany.offer</field>
-        <field name="view_mode">tree,form</field>
+        <field name="name">clients</field>
+        <field name="res_model">accompany.client</field>
+        <field name="view_mode">graph</field>
       
     </record>
        <record id="act_employe" model="ir.actions.act_window">
@@ -35,23 +35,25 @@
                     <form string="Dashboard">
                         <board style="2-1"> 
                             <column>
+                                     <action String="test"
+                                        name="%(act_offers)d"
+                                />
                               
                                  <action String="test"
                                         name="%(act_patient_appointments)d"/>
                              
-                                         <action String="test"
-                                        name="%(act_offers)d"
-                                />
                                 
-                                         <action String="test"
-                                        name="%(act_employe)d"
-                                />
+                                
+                                       
                             </column>
                             <column>
+                             <action String="test"
+                                        name="%(act_employe)d"
+                                />
                                <action String="calendar"
                                         name="%(act_calendar)d"
                                 />
-                             
+                              
                             </column>
                         
                         </board>
