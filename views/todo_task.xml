@@ -10,7 +10,7 @@
                 <field name="Employes"/>
                 <field name="state"/>
                  <field name="is_late" invisible="0"/>
-                <field name="Ref_offer"/>
+             
                 
                
             </tree>
@@ -24,73 +24,162 @@
         <field name="arch" type="xml">
             <graph string="todo Graph">
                 <field name="name"/>
-                <field name="Ref_offer"/>
+   
             </graph>
         </field>
     </record>
     <record id="todo_task_view_form" model="ir.ui.view">
-        <field name="name">todo.task.form</field>
-        <field name="model">todo.task</field>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <header>
-                        <field name="state" widget="statusbar" options="{'clickable': 1}" required="1"/>
-                    
-                    
-                        
-          
-                    </header>
-                    <div class="oe_title">
-                        <label for="name"/>
-                        <h1>
-                            <field name="name" required="1"/>
-                        </h1>
-                        
-                    </div>
-                    <group>
-                        <group>
-                            <field name="due_date" required="1"/>
-                        </group>
-                        <group>
-                            <field name="Employes" required="1"/>
-                        </group>
-                        <group>
-                            <field name="description" required="1"/>
-                        </group>    
-                         <group>
-                            <field name="Ref_offer" required="1"/>
-                        </group>
-                        <group>
-                               <field name="tag_ids" widget="many2many_tags" required="1"/>
-                        </group>
-                         <group>
-                       <field name="state"/> 
-                        </group>
-                         <group>
-                            <field name="clients"/>
-                        </group>
-                       <group>
-                          <button name="action_send_mail" string="Meeting Mail" type="object"/></group>
-                    </group>
-                    
-                </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids"/>
-                    <field name="activity_ids"/>
-                    <field name="message_ids"/>
+    <field name="name">todo.task.form</field>
+    <field name="model">todo.task</field>
+    <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <header>
+                    <field name="state" widget="statusbar" options="{'clickable': 1}" required="1"/>
+                </header>
+                <div class="oe_title">
+                    <label for="name" class="o_form_label"/>
+                    <h1>
+                        <field name="name" required="1"/>
+                    </h1>
                 </div>
-            </form>
-        </field>
-    </record>
+                <group>
+                    <group>
+                        <field name="Piste" default="True"/>
+                    </group> 
+                    <group>
+                        <field name="Offre"/>
+                    </group>
+                      <group>
+                         <field name="clients"/>
+                    </group>
+                     
+                    <group>
+                        <field name="description" required="1"/>
+                    </group> 
+                    <group>
+                        <field name="due_date" string="Date d'export " required="1"/>
+                    </group>
+                    <group>
+                        <field name="tag_ids" widget="many2many_tags" required="1"/>
+                    </group>
+                   <group>
+                    <field name="priority" widget="priority"/>
+                   </group>
+                 </group>   
+                <notebook>
+                    <page string="Informations Client/prospect">
+                        <h1>Information de contact</h1>
+                        <div>
+                        
 
+                             <group>
+                                <group>
+                                        <field name="clients" required="1"/>
+                                    </group>
+                                <group>
+                                    <field name="Adresse" required="1"/>
+                                     </group>
+                                <group> 
+                                    <field name="nameResponsable" required="1"/>
+                                     </group>
+                                <group>
+                                    <field name="titre" required="1"/>
+                                     </group>
+                                <group>
+                                    <field name="Poste" String="Poste" required="1"/>
+                                     </group>
+                                <group>
+                                    <field name="clientsemail" String="Email" required="1"/>
+                                     </group>
+                                <group><field name="country" required="1"/>
+                                 </group>
+                                <group><field name="phone_number" String="Mobile" required="1"/>
+                                 </group>
+                          
+                                 <group><field name="Langue" required="1"/> </group>
+                            </group>
+                            <group>
+                                 <h1>Marketing</h1>
+                                  <group>
+                                 </group>
+                                <group><field name="Campagne" required="1"/>
+                               
+                                    <field name="Moyen" required="1"/> 
+                                    <field name="Source" required="1"/> 
+                                    <field name="Siteweb" required="1"/> 
+                                </group>
+                             </group>
+                            <group>
+                                
+                                    <h1>Client/prospect</h1>
+                                     <group> 
+                                </group>
+                                    <group> 
+                                <field name="Clientcheckbox" required="1"/> 
+                                    <field name="Prospectcheckbox" required="1"/> 
+                                </group>
+                               
+                             </group>
+                              <group>
+                                <h1>Divers</h1>
+                                 <group> 
+                                </group>
+                                <group><field name="Apportepar" String="Apporté par" required="1"/> </group>
+                                
+                            
+                             </group>
+                        </div>
+                    </page>
+                    <page>
+                        <h1>Détail opportunité</h1>
+                    
+                    </page>
+                    <page  string="Detail Opportunity">
+                             <h1>Détail opportunité</h1>
+                    
+                             <group>
+                                <group>
+                                        <field name="Type" required="1"/>
+                                         <field name="AffectationOffre" required="1"/>
+                                          <field name="AffectationBU" required="1"/>
+                                </group>
+                                 
+                            </group>
+                    </page>
+                    <page string="Date d'avencement">
+                         <h1>Date opportunité</h1>
+                    
+                             <group>
+                                <group>
+                                        <field name="Dateouverturereception" required="1"/>
+                                         <field name="Date_Envoi" required="1"/>
+                                          <field name="Date_reception" required="1"/>
+                                          <field name="Date_Production_offre" required="1"/>
+                                         <field name="Date_Soumission" required="1"/>
+                                          <field name="Date_Sort" required="1"/>
+                                </group>
+                                 
+                            </group>
+                     </page>
+                </notebook>
+
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids"/>
+                <field name="activity_ids"/>
+                <field name="message_ids"/>
+            </div>
+        </form>
+    </field>
+</record>
 
 
     <record id="view_todo_kanban" model="ir.ui.view">
             <field name="name">todo.task.kanban</field>
             <field name="model">todo.task</field>
             <field name="arch" type="xml">
-               <kanban colors="blue:state=='completed';red:state=='new';grey:state=='in_progress'" default_group_by="state">
+               <kanban  default_group_by="state">
                    
                     <templates>
                         <t t-name="kanban-box">
@@ -103,8 +192,8 @@
                                         <li>   client:<field name="clients"/> </li>
                                              <li>  Employes: <field name="Employes"/> </li>
                                         <li> Deadline:<field name="due_date"/></li>
-                                          <li> Offer:<field name="Ref_offer"/></li>
-                              
+                                   
+                        
                                           <div class="oe_kanban_details ">
                                    <ul> 
                                     <li>   Tags<field name="tag_ids" widget="many2many_tags" required="1"/></li>
@@ -136,10 +225,10 @@
                 <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
                 <filter name="group_date" string="Date" context="{'group_by': 'due_date'}"/>
                 <filter name="group_assign_to_id" string="Assignee" context="{'group_by': 'Employes'}"/>
-                <filter name="group_Ref_offer" string="Ref_offer" context="{'group_by': 'Ref_offer'}"/>
+
                 <searchpanel style="background-color: #3DBFFF;">
                        <field name="state" string="state"  enable_counters="1" icon="fa-exhange"/>
-                       <field name="Ref_offer"   string="Ref_offer"  select="multi"  enable_counters="1"  icon="fa-exhange"/>
+                      
                         <field name="clients"   string="clients"  select="multi"  enable_counters="1"  icon="fa-exhange"/>
                 </searchpanel>
             
@@ -158,15 +247,15 @@
         </field>
     </record>
     <record id="todo_task_action" model="ir.actions.act_window">
-        <field name="name">ToDo Task</field>
+        <field name="name">Opportunité</field>
         <field name="res_model">todo.task</field>
         <field name="view_mode">kanban,calendar,tree,form,graph</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
-                Click to add a new task.
+                Click to add a new Offer.
             </p>
         </field>
-    </record>
+    </record>  
       <!-- Define the scheduled job to check task due dates -->
     <record id="check_todo_date_cron" model="ir.cron">
         <field name="name">Check Todo Task Due Dates</field>

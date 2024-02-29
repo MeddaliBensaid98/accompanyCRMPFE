@@ -9,8 +9,27 @@ class AccompanyClient(models.Model):
     _description = "Accompany Client Model"
     
 
-    name = fields.Char(string='Name', required=True ,   tracking=True)
-    email = fields.Char(string='Email', size=100)
+    name = fields.Char(string='Client', required=True ,   tracking=True)
+    nameResponsable=fields.Char(string='Nom Du Contact', required=True ,   tracking=True)
+    Poste=fields.Char(string='Poste ', required=True ,   tracking=True)
+   
+    email = fields.Char(string='Email')
+    titre =fields.Selection([
+        ('Docteur', 'Docteur'),
+        ('Madame', 'Madame'),
+        ('Madamoiselle  ', 'Madamoiselle'),
+        ('Monsieur', 'Monsieur'),
+        ('Professeur', 'Professeur'),
+        # Add more Monsieur as needed
+    ], string='titre',create=True)
+    Adresse=fields.Char(string='Adresse', required=True ,   tracking=True)
+    Langue =fields.Selection([
+        ('Francais', 'Francais'),
+        ('Anglais', 'Anglais'),
+        
+       
+        # Add more countries as needed
+    ], string='Langue',create=True)
     country = fields.Selection([
         ('+1', '+1 - United States'),
         ('+44', '+44 - United Kingdom'),
@@ -18,16 +37,46 @@ class AccompanyClient(models.Model):
         ('+216', '+216 - Tunisia'),
         # Add more countries as needed
     ], string='Country Code')
+    Campagne = fields.Selection([
+        ('Sale', 'Sale'),
+        ('Christmas_Special', 'Christmas Special'),
+        ('Email_Campaign_Service', 'Email Campaign-Service'),
+       
+        # Add more countries as needed
+    ], string='Campagne',create=True)   
+    Moyen   = fields.Selection([
+        ('Banner', 'Banner'),
+        ('Direct', 'Direct'),
+        ('Email', 'Email'),
+        ('Facebook', 'Facebook'),
+        ('Linkedin', 'Linkedin'),
+        ('Phone', 'Phone'),
+       
+        # Add more countries as needed
+    ], string='Moyen',create=True) 
+    Source  = fields.Selection([
+        ('Moteur de Recherche', 'Moteur_de_Recherche'),
+        ('Rappel_de_Piste', 'Rappel De Piste'),
+        ('Lettre_d_information', 'Lettre d information'),
+        ('Facebook', 'Facebook'),
+        ('Linkedin', 'Linkedin'),
+        ('Twitter', 'Twitter'),
+    
+       
+        # Add more countries as needed
+    ], string='Source',create=True) 
+    Siteweb = fields.Text(string='Site web')
     is_foreign = fields.Boolean(string='Is Foreign?' , tracking=True) 
     notes = fields.Text(string='Notes')
     capitalized_name = fields.Char(string='Capitalized Name', compute='_compute_capitalized_name')
     phone_number = fields.Char(string='Phone Number', size=20)
     ref = fields.Char(string="Reference", default=lambda self: _('New'))
-    offer_id = fields.Many2one('accompany.offer',string="offer",tracking=True)
-  
+    Clientcheckbox= fields.Boolean(string='Client' ) 
+    Prospectcheckbox= fields.Boolean(string='Prospect' ) 
+    
     tasks = fields.Many2one('todo.task',string="tasks",tracking=True)
  
-
+    Apportepar = fields.Char(string='Apporté par')
 
     @api.model_create_multi
     def create(self, vals_list):

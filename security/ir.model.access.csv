@@ -1,5 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_accompany_offer,access_accompany_Offer,AccompanyCRM.model_accompany_offer,base.group_user,1,1,1,1
+
 AccompanyCRM.access_accompany_client,access_accompany_client,AccompanyCRM.model_accompany_client,base.group_user,1,1,1,1
 access_todo_task,TODO Task,AccompanyCRM.model_todo_task,base.group_user,1,1,1,1
 accompany.employe_access,Access_Accompany_Employe,AccompanyCRM.model_accompany_employe,base.group_user,1,1,1,1

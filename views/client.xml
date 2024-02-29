@@ -13,17 +13,27 @@
                         </h1>
                 </div>
                 <group>
-                    <field name="name" required="1"/>
-                    <field name="email" required="1"/>
-                    <field name="country" required="1"/>
-                    <field name="phone_number" required="1"/>
-                    
-                    
-                    <field name="is_foreign" required="1"/>
-                   
-                    <field name="notes" required="1"/>
+                        <field name="name" required="1"/>
+                         <field name="Adresse" required="1"/>
+                        <field name="nameResponsable" required="1"/>
+                        <field name="titre" required="1"/>
+                        <field name="Poste" required="1"/>
+                         <field name="email" required="1"/>
+                        <field name="country" required="1"/>
+                        <field name="phone_number" required="1"/>
+                        <field name="Campagne" required="1"/>
+                        <field name="Moyen" required="1"/>
+                        <field name="Source" required="1"/>
+                        <field name="Siteweb" required="1"/>
+                        <field name="Clientcheckbox" required="1"/>
+                        <field name="Prospectcheckbox" required="1"/>
+                        <field name="Langue" required="1"/>
+                        <field name="Apportepar" String="Apporté par" required="1"/>
+                        
+                        <field name="is_foreign" required="1"/>
+                        <field name="notes" required="1"/>
             
-                    <field name="capitalized_name" />
+                        <field name="capitalized_name" />
                 </group>
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>

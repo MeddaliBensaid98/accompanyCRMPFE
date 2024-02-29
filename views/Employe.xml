@@ -19,7 +19,8 @@
                         <field name="phone_number" class="oe_inline" required="1"/>
                         <field name="Rank" required="1"/>
                         <field name="Tasks" required="1"/>  
-                      
+                       
+                     
                         <field name="capitalized_name" required="1"/>
                     </group>
                     <div class="oe_chatter">

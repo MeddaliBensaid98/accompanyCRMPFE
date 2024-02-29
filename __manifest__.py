@@ -10,7 +10,7 @@
         'data/sequence.xml', 
         'views/menu.xml',
         'views/client.xml',
-        'views/offer.xml',
+
         'views/todo_task.xml',
         'views/Employe.xml',
         'views/dashboard.xml',

@@ -45,7 +45,7 @@
                                                         <div>
                                                             Dear <t t-out="object.clients.name "></t>,
                                                             <br /><br />
-                                                            I hope this message finds you well. I am writing to suggest that we schedule a meeting to discuss <t t-out="object.Ref_offer.Offername"/><br />. I believe that getting together to brainstorm ideas and collaborate will be incredibly beneficial for <t t-out="object.name"/> Task. I am available, but I'm also flexible and willing to adjust to accommodate your schedule. 
+                                                            I hope this message finds you well. I am writing to suggest that we schedule a meeting to discuss <t t-out="object.name"/><br />. I believe that getting together to brainstorm ideas and collaborate will be incredibly beneficial for <t t-out="object.name"/> offer. I am available, but I'm also flexible and willing to adjust to accommodate your schedule. 
                                                             <br />Cordialement, <t t-out="user.name"/>
                                                         </div>
                                                     </td>
