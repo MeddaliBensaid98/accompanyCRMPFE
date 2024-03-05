@@ -40,7 +40,14 @@ class AccompanyEmploye(models.Model):
     capitalized_name = fields.Char(string='Capitalized Name', compute='_compute_capitalized_name')
     phone_number = fields.Char(string='Phone Number', size=20)
     
-   
+    manager_names_selection = fields.Selection(
+        string="Manager Names",
+        selection="_get_manager_names_selection"
+    )
+    def _get_manager_names_selection(self):
+        
+        manager_records = self.search([('Rank', '=', 'MA')])
+        return [(record.id, record.name) for record in manager_records]
 
     
     @api.constrains('email')
@@ -58,14 +65,7 @@ class AccompanyEmploye(models.Model):
             vals['id'] = self.env['ir.sequence'].next_by_code('accompany.employe')
         return super(AccompanyEmploye, self).create(vals_list)
 
-    @api.onchange('country')
-    def _onchange_country(self):
-        for record in self:
-            if record.country and record.phone_number:
-                if not record.phone_number.startswith(record.country):
-                    record.phone_number = record.country + record.phone_number[len(record.country):]
-            elif record.country:
-                record.phone_number = record.country
+
                 
     @api.depends('name')
     def _compute_capitalized_name(self):
@@ -74,20 +74,43 @@ class AccompanyEmploye(models.Model):
                 self.capitalized_name = self.name.upper()
         else:
                 self.capitalized_name = ""
+    
 
-    @api.model_create_multi
-    def create(self, vals_list):
-        for vals in vals_list:
-            if 'email' in vals:
-                existing_employee = self.env['accompany.employe'].search([('email', '=', vals['email'])])
-                if existing_employee:
-                    raise ValidationError("Employee with email '%s' already exists." % vals['email'])
-            if 'phone_number' in vals:
-                existing_phone_employee = self.env['accompany.employe'].search([('phone_number', '=', vals['phone_number'])])
-                if existing_phone_employee:
-                    raise ValidationError("Employee with phone number '%s' already exists." % vals['phone_number'])
+        @api.model_create_multi
+        def create(self, vals_list):
+            for vals in vals_list:
+                if 'phone_number' in vals and not vals['phone_number'].isdigit():
+                 raise ValidationError("Phone number must contain only numbers.")
+                if 'email' in vals:
+                    existing_employee = self.env['accompany.employe'].search([('email', '=', vals['email'])])
+                    if existing_employee:
+                        raise ValidationError("Employee with email '%s' already exists." % vals['email'])
+                if 'phone_number' in vals:
+                    existing_phone_employee = self.env['accompany.employe'].search([('phone_number', '=', vals['phone_number'])])
+                    if existing_phone_employee:
+                        raise ValidationError("Employee with phone number '%s' already exists." % vals['phone_number'])
 
-           
-        return super(AccompanyEmploye, self).create(vals_list)
-
+            
+            res =self.super(AccompanyEmploye, self).create(vals_list)
         
+        # After creating the records, return a reload action to automatically refresh the page
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'reload',
+               
+            }
+    @api.model
+    def generate_data(self):
+    # do stuff on database
+  
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'reload',
+        }
+    @api.model_create_multi
+    def unlink(self):
+        res = super(AccompanyEmploye, self).create()
+        return { 'type': 'ir.actions.client', 'tag': 'reload', } 
+    
+    
+  

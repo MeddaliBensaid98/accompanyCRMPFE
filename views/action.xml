@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_accompany_action_form" model="ir.ui.view">
+    <field name="name">accompany.action.form</field>
+    <field name="model">accompany.action</field>
+    <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <div class="oe_title">
+                        <h1>
+                            <field name="id" readonly="1" required="1"/>
+                        </h1>
+                </div>
+                <group>
+                        <field name="DerniereAction" required="1"/>
+                         <field name="DateAction" required="1"/>
+                        <field name="inscriptionsimultanee" required="1"/>
+                        <field name="Risque" required="1"/>
+                       <field name="Actionrequise" required="1"/>
+                </group>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+    <record id="view_accompany_action_tree" model="ir.ui.view">
+        <field name="name">accompany.action.tree</field>
+        <field name="model">accompany.action</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="id" readonly="1" required="1"/>
+                   <field name="DerniereAction" required="1"/>
+                         <field name="DateAction" required="1"/>
+                        <field name="inscriptionsimultanee" required="1"/>
+                        <field name="Risque" required="1"/>
+                          <field name="Actionrequise" required="1"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_accompany_action_search" model="ir.ui.view">
+    <field name="name">accompany.action.search</field>
+    <field name="model">accompany.action</field>
+    <field name="arch" type="xml">
+            <tree>
+                   <field name="id" readonly="1" required="1"/>
+                   <field name="DerniereAction" required="1"/>
+                         <field name="DateAction" required="1"/>
+                        <field name="inscriptionsimultanee" required="1"/>
+                        <field name="Risque" required="1"/>
+                          <field name="Actionrequise" required="1"/>
+               
+            </tree> 
+          
+           
+     </field>
+    </record>
+ 
+    <record id="action_accompany_action" model="ir.actions.act_window">
+        <field name="name">actions</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">accompany.action</field>
+        <field name="view_mode">tree,form</field>
+    
+
+    </record>
+  
+
+</odoo>

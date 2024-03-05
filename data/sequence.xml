@@ -16,6 +16,14 @@
             <field name="padding">5</field>
         </record>
     </data>
+    <data noupdate="1">
+        <record id="sequence_acompany_Action" model="ir.sequence">
+            <field name="name">Action Sequence</field>
+            <field name="code">accompany.Action</field>
+            <field name="prefix">AAC</field>
+            <field name="padding">5</field>
+        </record>
+    </data>
  
 
   

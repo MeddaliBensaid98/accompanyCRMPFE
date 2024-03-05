@@ -49,19 +49,21 @@
                     </group> 
                     <group>
                         <field name="Offre"/>
+                         <field name="abondonne"/>
                     </group>
+                    
                       <group>
-                         <field name="clients"/>
+                         <field name="clients"required="1"/>
                     </group>
                      
                     <group>
-                        <field name="description" required="1"/>
+                        <field name="description" />
                     </group> 
                     <group>
-                        <field name="due_date" string="Date d'export " required="1"/>
+                        <field name="due_date" string="Date d'export "required="1"/>
                     </group>
                     <group>
-                        <field name="tag_ids" widget="many2many_tags" required="1"/>
+                        <field name="tag_ids" widget="many2many_tags" />
                     </group>
                    <group>
                     <field name="priority" widget="priority"/>
@@ -75,39 +77,39 @@
 
                              <group>
                                 <group>
-                                        <field name="clients" required="1"/>
+                                        <field name="clients"/>
                                     </group>
                                 <group>
-                                    <field name="Adresse" required="1"/>
+                                    <field name="Adresse" />
                                      </group>
                                 <group> 
-                                    <field name="nameResponsable" required="1"/>
+                                    <field name="nameResponsable" String="Poste"/>
                                      </group>
                                 <group>
-                                    <field name="titre" required="1"/>
+                                    <field name="titre"/>
                                      </group>
                                 <group>
-                                    <field name="Poste" String="Poste" required="1"/>
+                                    <field name="Poste" String="Poste"/>
                                      </group>
                                 <group>
-                                    <field name="clientsemail" String="Email" required="1"/>
+                                    <field name="clientsemail" String="Email"/>
                                      </group>
-                                <group><field name="country" required="1"/>
+                                <group><field name="country" />
                                  </group>
-                                <group><field name="phone_number" String="Mobile" required="1"/>
+                                <group><field name="phone_number" String="Mobile" />
                                  </group>
                           
-                                 <group><field name="Langue" required="1"/> </group>
+                                 <group><field name="Langue" /> </group>
                             </group>
                             <group>
                                  <h1>Marketing</h1>
                                   <group>
                                  </group>
-                                <group><field name="Campagne" required="1"/>
+                                <group><field name="Campagne" />
                                
-                                    <field name="Moyen" required="1"/> 
-                                    <field name="Source" required="1"/> 
-                                    <field name="Siteweb" required="1"/> 
+                                    <field name="Moyen" /> 
+                                    <field name="Source" /> 
+                                    <field name="Siteweb" /> 
                                 </group>
                              </group>
                             <group>
@@ -116,8 +118,8 @@
                                      <group> 
                                 </group>
                                     <group> 
-                                <field name="Clientcheckbox" required="1"/> 
-                                    <field name="Prospectcheckbox" required="1"/> 
+                                <field name="Clientcheckbox" /> 
+                                    <field name="Prospectcheckbox" /> 
                                 </group>
                                
                              </group>
@@ -125,7 +127,7 @@
                                 <h1>Divers</h1>
                                  <group> 
                                 </group>
-                                <group><field name="Apportepar" String="Apporté par" required="1"/> </group>
+                                <group><field name="Apportepar" String="Apporté par" /> </group>
                                 
                             
                              </group>
@@ -140,28 +142,111 @@
                     
                              <group>
                                 <group>
-                                        <field name="Type" required="1"/>
-                                         <field name="AffectationOffre" required="1"/>
-                                          <field name="AffectationBU" required="1"/>
+                                        <field name="Type" />
+                                         <field name="AffectationOffre" />
+                                          <field name="AffectationBU" />
                                 </group>
                                  
                             </group>
                     </page>
-                    <page string="Date d'avencement">
-                         <h1>Date opportunité</h1>
+                    <page string="Catégorie et Avancement">
+                         <h1>Catégorie et Avancement</h1>
                     
                              <group>
                                 <group>
-                                        <field name="Dateouverturereception" required="1"/>
-                                         <field name="Date_Envoi" required="1"/>
-                                          <field name="Date_reception" required="1"/>
-                                          <field name="Date_Production_offre" required="1"/>
-                                         <field name="Date_Soumission" required="1"/>
-                                          <field name="Date_Sort" required="1"/>
+                                    
+                                        <field name="state" />
+                                        <field name="Statue" />
+                                        <field name="Resultatgo" invisible = "Statue != 'go' "/>
+                                         
+                                        <field name="Date_reception"required="1"/>
+                                        <field name="Dateouverturereception"required="1" />
+                                       
+                                         
+                                          <field name="Date_Sort"required="1" />
+                                          <field name="due_date" string="Date d'export " required="1"/>
                                 </group>
                                  
                             </group>
                      </page>
+                    <page string="Staff opportunités">
+                        
+                  <breakLine />
+                                <h1>Contrat</h1>
+                                 <breakLine />
+                              <group><field name="Relation" String="Relation:" /></group>
+                                <group>    <field name="Contributeur" String="Contributeur:" /> </group> 
+                                    <breakLine />
+            
+                                        
+                                          <h1>Offre</h1>
+                                            <breakLine />
+                                            
+                                    
+                                             <group><field name="Associe" String ="Associe:" /></group>
+                                            <group> <field name="Contributeur2"  String ="Contributeur:" /></group>
+                                            <group> <field name="manager_names_selection" String ="Manager:" /></group>
+                                            <group> <field name="Employes" String ="Consultant:"/></group>
+                                              <group>   <field name="Relation2" String ="Relation:" /></group>
+                           <breakLine />
+                               
+                                      <h1>Closing Négociation</h1>
+                                          <group> <breakLine />
+                                      <breakLine /></group>
+                                      <group><breakLine /></group>
+                                      <breakLine />
+
+                                       <group>
+                                         <field name="ClosingAssocie" String ="Closing Negociation" />
+                                    </group>
+                                     <group> <field name="Contributeur3"  String ="Contributeur:"/></group>
+                                
+                                 
+                             
+                            
+                                      
+                                
+                                   
+                              
+                              
+                             
+                            
+                     </page>
+                          <page string="Suivi Opportunité">
+                                 
+                                      <h1>Suivi Opportunité</h1>
+                                          <group> <breakLine />
+                                      <breakLine /></group>
+                                      <group><breakLine /></group>
+                                      <breakLine />
+
+                                   
+                           
+                                     <field name="classbids" widget="many2many" options="{'no_create_edit': False}"/>
+
+                                   
+                              
+                             </page>
+                            <page string="Budget"         invisible = "Offre ==  False"     >
+                              <h1>Budget</h1>
+                                 <group> <field name="BudgetDinar"  String ="Budget en Dinar:"/></group>
+                                      <group> <field name="Budgeteuro"  String ="Budget en Euro:"/></group>
+                                    <group> <field name="Budgetpondere"  String ="Budget pondéré:"/></group>
+                                       <group> <field name="Revenuespere"  String ="Revenu spéré:"/></group>
+                                    <group> <field name="Probabilite"  String ="Probabilité:"/></group>
+
+
+   
+
+
+
+                                </page>
+                         <page string="Documentation">
+                         <h1>Documentation</h1>
+                                 <group> <field name="OffreTechnique"  String ="Budget en Dinar:"/></group>
+                                    <group> <field name="OffreFinanciere"  String ="Budget en Dinar:"/></group>
+                                      <group> <field name="DossierAdministratif"  String ="Budget en Dinar:"/></group>  
+                                      </page>
                 </notebook>
 
             </sheet>
@@ -185,18 +270,20 @@
                         <t t-name="kanban-box">
                             <div t-attf-class="oe_kanban_global_click">
                              <div class="o_kanban_record_headings mt4">
-                                        <strong class="o_kanban_record_title">TASK:<field name="name"/></strong>
+                                        <strong class="o_kanban_record_title"><field name="name"/></strong>
                                         
                                     </div>
-                                         <li>  state: <field name="state"/> </li>
-                                        <li>   client:<field name="clients"/> </li>
-                                             <li>  Employes: <field name="Employes"/> </li>
-                                        <li> Deadline:<field name="due_date"/></li>
+                                     
+                                           <field name="clients"/> 
+                                              <field name="Employes"/> 
+                                     <field name="due_date"/>
                                    
                         
                                           <div class="oe_kanban_details ">
                                    <ul> 
-                                    <li>   Tags<field name="tag_ids" widget="many2many_tags" required="1"/></li>
+                                    <li>   <field name="tag_ids" widget="many2many_tags" /></li>
+
+                                      <li>   <field name="priority" widget="priority"/></li>
                                 
                                    </ul>
                                     <ul>
@@ -270,7 +357,7 @@
     </record>
 
   <menuitem id="menu_todos"
-              name="TODO"
+              name="Offres"
              parent="menu_accompany_root"  
               action="todo_task_action"
               sequence="10"/>

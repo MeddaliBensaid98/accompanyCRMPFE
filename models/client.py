@@ -54,6 +54,16 @@ class AccompanyClient(models.Model):
        
         # Add more countries as needed
     ], string='Moyen',create=True) 
+    Affectationsecteur      = fields.Selection([
+        ('Banques', 'Banques'),
+        ('Assurances', 'Assurances'),
+        ('SFS', 'SFS'),
+        ('Public', 'Public'),
+        ('Autre', 'Autre'),
+      
+       
+        # Add more countries as needed
+    ], string='Affectation secteur',create=True) 
     Source  = fields.Selection([
         ('Moteur de Recherche', 'Moteur_de_Recherche'),
         ('Rappel_de_Piste', 'Rappel De Piste'),
@@ -64,46 +74,41 @@ class AccompanyClient(models.Model):
     
        
         # Add more countries as needed
-    ], string='Source',create=True) 
+    ], string='Source', create=True, store=True, readonly=False)
+
     Siteweb = fields.Text(string='Site web')
     is_foreign = fields.Boolean(string='Is Foreign?' , tracking=True) 
     notes = fields.Text(string='Notes')
     capitalized_name = fields.Char(string='Capitalized Name', compute='_compute_capitalized_name')
-    phone_number = fields.Char(string='Phone Number', size=20)
+    phone_number = fields.Char(string='Phone Number',size=20)
     ref = fields.Char(string="Reference", default=lambda self: _('New'))
     Clientcheckbox= fields.Boolean(string='Client' ) 
     Prospectcheckbox= fields.Boolean(string='Prospect' ) 
-    
-    tasks = fields.Many2one('todo.task',string="tasks",tracking=True)
- 
+    _columns = {
+       'tasks' : fields.Many2one('todo.task',string="tasks",tracking=True)
+      }
     Apportepar = fields.Char(string='Apporté par')
 
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list: 
             vals['ref'] = self.env['ir.sequence'].next_by_code('accompany.client')
+            if 'phone_number' in vals and not vals['phone_number'].isdigit():
+                raise ValidationError("Phone number must contain only numbers.")
             if 'email' in vals:
-                existing_employee = self.env['accompany.client'].search([('email', '=', vals['email'])])
-                if existing_employee:
+                existing_client = self.env['accompany.client'].search([('email', '=', vals['email'])])
+                if existing_client:
                     raise ValidationError("Client with email '%s' already exists." % vals['email'])
             if 'phone_number' in vals:
-                existing_phone_employee = self.env['accompany.client'].search([('phone_number', '=', vals['phone_number'])])
-                if existing_phone_employee:
-                    raise ValidationError("client with phone number '%s' already exists." % vals['phone_number'])
+                existing_client = self.env['accompany.client'].search([('phone_number', '=', vals['phone_number'])])
+                if existing_client:
+                    raise ValidationError("Client with phone number '%s' already exists." % vals['phone_number'])
             if 'name' in vals:
-                existing_employee = self.env['accompany.client'].search([('name', '=', vals['name'])])
-                if existing_employee:
+                existing_client = self.env['accompany.client'].search([('name', '=', vals['name'])])
+                if existing_client:
                     raise ValidationError("Client with name '%s' already exists." % vals['name'])
         return super(AccompanyClient, self).create(vals_list)
-    
-    @api.onchange('country')
-    def _onchange_country(self):
-        for record in self:
-            if record.country and record.phone_number:
-                if not record.phone_number.startswith(record.country):
-                    record.phone_number = record.country + record.phone_number[len(record.country):]
-            elif record.country:
-                record.phone_number = record.country
+
                 
     @api.depends('name')
     def _compute_capitalized_name(self):
@@ -140,3 +145,19 @@ class AccompanyClient(models.Model):
             self.notes = 'This company is not from Tunisia.'
         else:
             self.notes = 'This company is from Tunisia.'
+    
+    @api.constrains('phone_number')
+    def _check_phone_number(self):
+        for record in self:
+            if record.phone_number and not record.phone_number.isdigit():
+                raise ValidationError("Phone number must contain only numbers.")
+             
+    @api.onchange('Clientcheckbox')
+    def _onchange_Clientcheckbox(self):
+        if self.Clientcheckbox:
+            self.Prospectcheckbox = False
+
+    @api.onchange('Prospectcheckbox')
+    def _onchange_Prospectcheckbox(self):
+        if self.Prospectcheckbox:
+            self.Clientcheckbox = False

@@ -22,11 +22,13 @@
                        
                      
                         <field name="capitalized_name" required="1"/>
+                      
                     </group>
                     <div class="oe_chatter">
                         <field name="message_follower_ids"/>
                         <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
                     </div>
+                 
                 </sheet>
             </form>
         </field>
@@ -46,7 +48,7 @@
                 <field name="country"/>
                          
                 <field name="phone_number"/>
-                <field name="Tasks" />
+               
               
             </tree>
         </field>
@@ -90,9 +92,10 @@
         <field name="view_mode">tree,form</field>
         <field name="context">{'search_default_filter_child': 1}</field>
         <field name="search_view_id" ref="view_accompany_employe_search"/>
-
+     
+      
     </record>
-
+ 
     <menuitem id="menu_employes"
               name="employe"
              parent="menu_accompany_root"  

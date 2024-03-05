@@ -10,11 +10,14 @@
         'data/sequence.xml', 
         'views/menu.xml',
         'views/client.xml',
-
+        'views/action.xml',
         'views/todo_task.xml',
         'views/Employe.xml',
         'views/dashboard.xml',
         'views/mail_template_data.xml'
+    ],
+     'js': [
+        'static/js/test.js',
     ],
     'images': [
         'static/description/icon.png',  # Adjust the path to your icon image
