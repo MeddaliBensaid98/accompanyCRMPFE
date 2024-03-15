@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
    <menuitem id="menu_accompany_root"
               name="AccompanyCRM"
+          
+            sequence="10"/>
             
+   <menuitem id="pipiline"
+              name="CRM"
+         parent="menu_accompany_root"
+            sequence="10"/>
+   <menuitem id="contacts12"
+              name="Contacts"
+            parent="menu_accompany_root"
+              sequence="10"/>
+   <menuitem id="menu_accompany_Configuration"
+              name="Configuration"
+            parent="menu_accompany_root"
               sequence="10"/>
 
-
-               
 </odoo>

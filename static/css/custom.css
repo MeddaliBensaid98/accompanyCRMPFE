@@ -1,0 +1,10 @@
+.inline-group div {
+    display: inline-block;
+}
+
+.inline-group h4,
+.inline-group .o_field_widget {
+    display: inline;
+    margin-right: 5px;
+    /* Adjust margin as needed */
+}

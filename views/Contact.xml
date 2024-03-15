@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+ <record id="action_accompany_partner" model="ir.actions.act_window">
+        <field name="name">partner</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+  
+     
+      
+    </record>
+ 
+  
+    <menuitem id="menu_Contacts10"
+              name="Contacts"
+             parent="contacts12"  
+              action="action_accompany_partner"
+              sequence="10"/>
+  
+</odoo>

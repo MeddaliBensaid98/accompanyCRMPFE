@@ -1,0 +1,152 @@
+
+
+<odoo>
+ <record id="action_accompany_offer" model="ir.ui.view">
+        <field name="name">crm.lead.inherit</field>
+         <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <data>
+       
+                 
+                 <xpath expr='//field[@class="text-break"]' position='after'>
+                   
+                        <span class="oe_black p-2" style="color: black; width: 50px;"> Piste:</span>  <field name="Pistecheckbox"  String="Piste:" />
+                       <span class="oe_black p-2" style="color: black; width: 50px;"> Offer:</span> <field name="offercheckbox"  String="offer:" />
+                   
+                  
+                       
+                  
+                 </xpath> 
+                    <xpath expr='//div[@class="col-auto pb-2 pb-md-0"]' position='attributes'>
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                   
+                      <xpath expr='//div[@class="col-auto"]' position='attributes'>
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                   <xpath expr='//group[@class="mt48"]' position='before'>
+                    <group string="Client/Prospect  ">
+                      
+                     
+                    
+                           <field name="Prospectcheckbox"  String="Prospect:" /> 
+                                <field name="Clientcheckbox"  /> 
+                             <field name="Affectationsecteurtype" options="{'no_create': True, 'no_edit': True}"  /> 
+                  
+                       
+                      
+                    </group>
+                    
+                   </xpath>
+                <xpath expr="//field[@name='expected_revenue']" position='attributes'>
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                  <xpath expr="//div[@class='d-flex align-items-baseline']" position='attributes'>
+                    <attribute name="invisible">1</attribute>
+                    <attribute name="style">display: none;</attribute>
+                </xpath>
+                <xpath expr="//div[@class='col-auto']" position='attributes'>
+                    <attribute name="invisible">1</attribute>
+                    <attribute name="style">display: none;</attribute>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Détail opportunité" name="Detail_opportunite">
+                            <group String="Détail opportunité" class="inline-group">
+                               
+                       
+                                    <field name="Typetype" class="oe_inline" context="{'hide_code':True}" options="{'no_create': True, 'no_edit': True}"/>
+
+                           
+                               <field name="AffectationBUType" class="oe_inline" options="{'no_create': True, 'no_edit': True}"/>
+  <field name="afectationoffreType" class="oe_inline" options="{'no_create': True, 'no_edit': True}"/>
+
+                           
+                                      
+                   
+                    
+                        
+                           
+                            </group>
+                      
+                    </page>
+                    <page string="Categorie et Avencement">
+                                <group String="Catégorie et Avancement">
+                                    <field name="stage_id"/>
+                                     <field name="Statueoffre"/>
+                              
+                                     
+                                    <field name="Dateouverturereception"/>
+                                    <field name="Date_reception"/>
+                                    <field name="Date_Sort"/>
+                                    <field name="date_deadline"/>
+                                </group>
+                    </page>
+                     <page string="Staff  Opportunité">
+                                <group>
+                                    
+                                        <field name="Relation"/>
+                                        <field name="Contributeur"/>
+                                                            
+                                    <field name="Relation2"/>
+                                    <field name="Contributeur2"/>
+                                    <field name="Manager_id"  String="Manager_id:"/>
+                                     <field name="Consultant_id"  String="Consultant_id:"/>
+                                   <field name="Relation3"/>
+                                
+
+                                   <field name="ClosingAssocie"/>
+                                     <field name="Contributeur3"/>
+                                   
+                                </group>
+                    </page>
+                       <page name="lead" string="Suivi Opportunité " >
+                               
+                                
+                             <group string="Suivi Opportunité">
+                                 <field name="activity_ids" widget="tree">
+                                    <tree>
+                                    
+                                            <field name="summary"/>
+                                        <!-- Include the field representing the type of activity -->
+                                        <field name="activity_type_id"/>
+                                        <field name="date_deadline"/>
+                                        <field name="user_id"/>
+                                        <!-- Add more fields as needed -->
+                                    </tree>
+                                </field>
+                                
+                                 </group>
+                              <!--   -->
+                                 </page>
+                     <page string="Budget" invisible = "offercheckbox ==  False"   >
+                                <group>  
+                                      <field name="activity_ids"  />
+       
+                                </group>
+                    </page>
+
+                      <page string="Documentation">
+                                <group>
+                                   
+                                      <field name="OffreTechnique"/>
+                                     <field name="OffreFinanciere"/>
+                                  <field name="DossierAdministratif"/>
+                                   
+                                </group>
+                    </page>
+             
+                 
+                </xpath>
+                      <!-- 
+                     <xpath expr="//page[@name='internal_notes']" position="replace"/>
+            -->
+            </data>
+        </field>
+     
+      
+    </record>
+   
+ 
+  
+</odoo>

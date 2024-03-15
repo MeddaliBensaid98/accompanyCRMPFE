@@ -1,0 +1,21 @@
+
+
+<odoo>  
+ 
+      
+ <record id="action_accompany_pipeline" model="ir.actions.act_window">
+        <field name="name">Pipeline</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">kanban,tree,form,calendar</field>
+  
+      
+    </record>
+
+    <menuitem id="menu_pipilne10"
+              name="offers"
+             parent="pipiline"  
+              action="action_accompany_pipeline"
+              sequence="10"/>
+  
+</odoo>

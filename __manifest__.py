@@ -3,18 +3,24 @@
     'author': 'Ben Said Mohamed Ali',
     'website': 'https://www.accompanyconsulting.net/',
     'summary': 'The new CRM',
-    'depends': ['mail','board'],
+    'depends': ['crm','contacts','base','web'],
 
     'data': [
+        
         'security/ir.model.access.csv',
-        'data/sequence.xml', 
+        'data/sequence.xml',
         'views/menu.xml',
-        'views/client.xml',
-        'views/action.xml',
-        'views/todo_task.xml',
-        'views/Employe.xml',
-        'views/dashboard.xml',
-        'views/mail_template_data.xml'
+        'views/Offer_form.xml',
+        'views/Contact.xml',
+        'views/pipeline.xml',
+         'views/Type.xml',
+        'views/afectationbu.xml',
+         'views/stage.xml',
+         'views/AffecteurSecteur.xml',
+
+        'views/afectiationoffre.xml',
+
+   
     ],
      'js': [
         'static/js/test.js',

@@ -1,0 +1,58 @@
+
+
+<odoo>  
+ 
+       <record id="view_accompany_type_form" model="ir.ui.view">
+        <field name="name">accompany.type.form</field>
+        <field name="model">accompany.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                
+                    <div class="oe_title">
+                            <h1>
+                                <field name="ref" readonly="1" required="1"/>
+                            </h1>
+                    </div>
+                    <group>
+                        <field name="TypeAccmpany" required="1"/>
+                
+                    </group>
+                 
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    
+    <record id="view_accompany_type_tree" model="ir.ui.view">
+        <field name="name">accompany.type.tree</field>
+        <field name="model">accompany.type</field>
+        <field name="arch" type="xml">
+            <tree>
+             
+                <field name="ref" readonly="1"/>
+                
+                <field name="TypeAccmpany"/>
+            
+              
+            </tree>
+        </field>
+    </record>
+ <record id="action_accompany_Type" model="ir.actions.act_window">
+        <field name="name">Type</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">accompany.type</field>
+        <field name="view_mode">tree,form</field>
+  
+     
+      
+    </record>
+
+    <menuitem id="menu_Type"
+              name="Type"
+             parent="menu_accompany_Configuration"  
+              action="action_accompany_Type"
+              sequence="10"/>
+  
+</odoo>

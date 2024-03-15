@@ -1,6 +1,8 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
-AccompanyCRM.access_accompany_client,access_accompany_client,AccompanyCRM.model_accompany_client,base.group_user,1,1,1,1
-access_todo_task,TODO Task,AccompanyCRM.model_todo_task,base.group_user,1,1,1,1
-accompany.employe_access,Access_Accompany_Employe,AccompanyCRM.model_accompany_employe,base.group_user,1,1,1,1
-accompany.action_access,Access_Accompany_action,AccompanyCRM.model_accompany_action,base.group_user,1,1,1,1
+accompany.Type,Access_Accompany_Type,AccompanyCRM.model_accompany_type,base.group_user,1,1,1,1
+
+accompany.accompany_afectationoffre,Access_accompany_afectationoffre,AccompanyCRM.model_accompany_afectationoffre,base.group_user,1,1,1,1
+
+accompany.accompany_afectationbu,Access_accompany_afectationbu,AccompanyCRM.model_accompany_afectationbu,base.group_user,1,1,1,1
+accompany.accompany_AffectationSecteur,Access_accompany_AffectationSecteur,AccompanyCRM.model_accompany_affectation_secteur_type,base.group_user,1,1,1,1

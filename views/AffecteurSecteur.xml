@@ -1,0 +1,58 @@
+
+
+<odoo>  
+ 
+       <record id="view_accompany_accompany_AffectationSecteur_form" model="ir.ui.view">
+        <field name="name">accompany.AffectationSecteur.form</field>
+        <field name="model">accompany.affectation_secteur_type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                
+                    <div class="oe_title">
+                            <h1>
+                                <field name="ref" readonly="1" />
+                            </h1>
+                    </div>
+                    <group>
+                        <field name="AffectationSecteur" required="1"/>
+            
+                    </group>
+                 
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    
+    <record id="view_accompany_AffectationSecteur_tree" model="ir.ui.view">
+        <field name="name">accompany.AffectationSecteur.tree</field>
+        <field name="model">accompany.affectation_secteur_type</field>
+        <field name="arch" type="xml">
+            <tree>
+             
+                <field name="ref" readonly="1"/>
+                
+                <field name="AffectationSecteur"/>
+            
+              
+            </tree>
+        </field>
+    </record>
+ <record id="action_accompany_AffectationSecteur" model="ir.actions.act_window">
+        <field name="name">AffectationSecteur</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">accompany.affectation_secteur_type</field>
+        <field name="view_mode">tree,form</field>
+  
+     
+      
+    </record>
+
+    <menuitem id="menu_afectationsecteur"
+              name="AffectationSecteur"
+             parent="menu_accompany_Configuration"  
+              action="action_accompany_AffectationSecteur"
+              sequence="10"/>
+  
+</odoo>
