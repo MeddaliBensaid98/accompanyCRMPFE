@@ -129,10 +129,11 @@
                       <page string="Documentation">
                                 <group>
                                    
-                                      <field name="OffreTechnique"/>
-                                     <field name="OffreFinanciere"/>
-                                  <field name="DossierAdministratif"/>
+                                    <group>    <field name="OffreTechnique"/>  </group>   <group> <field name="documents" invisible = "OffreTechnique == False "/>  </group>
+                                    <group>  <field name="OffreFinanciere"/> </group>   <group>  <field name="documents1" invisible = "OffreFinanciere == False " /> </group>
+                                 <group>     <field name="DossierAdministratif"/>   </group>   <group> <field name="documents2" invisible = "DossierAdministratif == False "/>  </group>
                                    
+                                
                                 </group>
                     </page>
              

@@ -14,6 +14,9 @@ class pipeline(models.Model):
       
     )
 
+   documents = fields.Binary(string='Documents')
+   documents1 = fields.Binary(string='Documents')
+   documents2 = fields.Binary(string='Documents')
    user_id = fields.Many2one('res.users', string="Assigned User")
 
   
