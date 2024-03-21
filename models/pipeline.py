@@ -88,7 +88,7 @@ class pipeline(models.Model):
        
             # Add more countries as needed
         ], string='Statue offre',create=True,store=True,readonly=False) 
-    
+  
    BudgetDinar=fields.Float("Budget en dinar")
    Budgeteuro=fields.Float("Budget en euros") 
    Budgetpondere=fields.Float("Budget pondéré") 
